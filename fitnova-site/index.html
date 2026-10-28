@@ -182,6 +182,61 @@
       color:#fff!important;
     }
 
+    .brand-pill-wrap{
+      position:fixed;
+      top:18px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(560px,calc(100% - 26px));
+      z-index:65;
+    }
+    .brand-chip{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(0,0,0,.22);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      color:#fff;
+      font-weight:600;
+      letter-spacing:.02em;
+      box-shadow:0 12px 28px rgba(0,0,0,.18);
+    }
+    .brand-icon{
+      width:26px;
+      height:26px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+    }
+    .brand-icon svg{
+      width:26px;
+      height:26px;
+      display:block;
+    }
+    .brand-text{
+      flex:1;
+      font-size:14px;
+      line-height:1.2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      color:#fff;
+    }
+    .brand-close{
+      background:transparent;
+      border:0;
+      color:rgba(255,255,255,.9);
+      font-size:22px;
+      line-height:1;
+      cursor:pointer;
+      padding:0 2px;
+    }
+
     .hero{
       min-height:100vh;
       min-height:100svh;
@@ -365,7 +420,6 @@
       background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 14'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23c8a15a' s[...]
     }
 
-    /* framed, gallery-style certificate */
     .cert.floating-card{
       --gold:linear-gradient(135deg,#ead9ab 0%,#c8a15a 32%,#f4e7c0 52%,#b88a3e 78%,#e3c98a 100%);
       position:relative;
@@ -563,7 +617,6 @@
       padding:.25rem .6rem;
     }
 
-    /* ---------- service cards: hover / tap for more ---------- */
     #svc{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));align-items:start;gap:1rem}
     #svc .card.svc{scroll-margin-top:100px}
     .card.svc{cursor:pointer;padding:1.3rem 1.3rem 1.1rem}
@@ -590,8 +643,6 @@
     .card.svc .more li{position:relative;padding-left:1.1rem}
     .card.svc .more li::before{content:'\2713';position:absolute;left:0;color:var(--pink);font-weight:700}
 
-
-    /* ---------- site-wide refinement: gold hairlines, quiet shadows ---------- */
     .cg > h3{
       display:flex;align-items:center;gap:1rem;
       font-weight:500;font-style:italic;font-size:1.7rem;color:#4a2a70;margin-bottom:1.1rem;
@@ -843,6 +894,7 @@
       .flow-rail{flex-direction:column;align-items:stretch}
       .flow-item{max-width:100%; width:100%;}
       .flow-item.detailed{max-width:100%;min-width:0;flex:none}
+      .brand-pill-wrap{top:12px}
     }
     @media(max-width:600px){
       section{padding:3.2rem 5%}
@@ -885,8 +937,9 @@
       .modal-nav.next{right:calc(50% - 70px)}
       .modal-count{bottom:3.1rem;font-size:1rem}
       footer{padding:1.6rem 1rem 5rem}
+      .brand-chip{gap:8px;padding:8px 10px}
+      .brand-text{font-size:12px}
     }
-    /* desktop browsers: details float over the page as a popover (no layout jump) */
     @media(min-width:761px){
       .card.svc{overflow:visible}
       .card.svc:hover,.card.svc:focus-within,.card.svc.open{z-index:30}
@@ -942,6 +995,27 @@
       <a href="#book" class="btn">Book Appointment</a>
     </div>
   </nav>
+
+  <div class="brand-pill-wrap" aria-label="FitNova brand header">
+    <div class="brand-chip" role="banner">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none">
+          <defs>
+            <linearGradient id="brandGlow" x1="0" y1="0" x2="48" y2="48">
+              <stop stop-color="#6B30A4"/>
+              <stop offset=".55" stop-color="#e05aa8"/>
+              <stop offset="1" stop-color="#c8a15a"/>
+            </linearGradient>
+          </defs>
+          <circle cx="24" cy="24" r="22" stroke="url(#brandGlow)" stroke-width="2"/>
+          <path d="M15 34V14l18 20V14" stroke="url(#brandGlow)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="33" cy="9.5" r="2.6" fill="#c8a15a"/>
+        </svg>
+      </span>
+      <span class="brand-text">FitNova Physiotherapy &amp; Academy</span>
+      <button class="brand-close" type="button" aria-label="Close">×</button>
+    </div>
+  </div>
 
   <section class="hero">
     <div class="hero-in">
@@ -1231,6 +1305,14 @@
         showCert(certIndex);
       }
     });
+
+    const brandClose = document.querySelector('.brand-close');
+    const brandPillWrap = document.querySelector('.brand-pill-wrap');
+    if (brandClose && brandPillWrap) {
+      brandClose.addEventListener('click', () => {
+        brandPillWrap.style.display = 'none';
+      });
+    }
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
