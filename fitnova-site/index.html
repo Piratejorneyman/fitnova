@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitNova Physiotherapy & Academy</title>
+  <meta name="description" content="FitNova Physiotherapy & Academy — expert physiotherapy, rehabilitation, and performance recovery.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#2A1B3D;
+      --muted:#6a5a82;
+      --line:#e9dff5;
+      --gold:#c8a15a;
+      --lav:#9C52D3;
+      --pink:#e05aa8;
+      --bg:#fff7fb;
+      --panel:#fffdfd;
+      --soft:#f7ebff;
+      --shadow:0 24px 70px rgba(62, 35, 80, 0.12);
+      --serif:"Cormorant Garamond",Georgia,serif;
+      --sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;
+      --mx:50vw;
+      --my:30vh;
+      --hue:255;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    a,button,.card,.flow-item,.opt{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+    body{
+      font-family:var(--sans);
+      color:var(--ink);
+      line-height:1.65;
+      background:var(--bg);
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    #bgCanvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      display:block;
+      pointer-events:none;
+      z-index:-3;
+      opacity:0.94;
+      filter:saturate(1.18) brightness(1.05);
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-2;
+      background:
+        radial-gradient(740px circle at var(--mx) var(--my), hsla(var(--hue), 90%, 78%, 0.42), transparent 58%),
+        radial-gradient(980px circle at 78% 12%, hsla(calc(var(--hue) + 35), 88%, 78%, 0.28), transparent 52%),
+        radial-gradient(900px circle at 12% 80%, hsla(calc(var(--hue) + 90), 92%, 78%, 0.22), transparent 58%);
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04)),
+        radial-gradient(380px circle at 25% 30%, rgba(156,82,211,0.08), transparent 50%),
+        radial-gradient(500px circle at 68% 40%, rgba(200,161,90,0.10), transparent 50%);
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.15}
+    section{padding:5.6rem 8%}
+    .eyebrow{
+      display:block;
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      font-size:.72rem;
+      font-weight:700;
+      color:#8C3CB0;
+      margin-bottom:.7rem;
+    }
+    .title{text-align:center;margin-bottom:3rem}
+    .title h2{font-size:clamp(2.2rem,4vw,3.3rem)}
+    .title p{color:var(--muted);max-width:620px;margin:.8rem auto 0}
+    .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+    .rv.in{opacity:1;transform:none}
+
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:60;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:.9rem 8%;
+      transition:background .35s ease, box-shadow .35s ease, backdrop-filter .35s ease;
+    }
+    nav.sc{
+      background:rgba(255,255,255,.8);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      box-shadow:0 1px 0 rgba(106,90,130,.12);
+    }
+    .logo{display:flex;align-items:center;gap:.75rem;color:var(--ink)}
+    .logo > span{display:flex;flex-direction:column;justify-content:center;gap:.3rem}
+    .logo svg{width:46px;height:46px;transition:transform .8s}
+    .logo:hover svg{transform:rotate(360deg)}
+    .logo b{
+      display:block;
+      font-family:var(--serif);
+      font-size:1.55rem;
+      letter-spacing:.065em;
+      line-height:1;
+      font-weight:600;
+    }
+    .logo b i{
+      font-style:normal;
+      background:linear-gradient(90deg,#9C52D3,#c8a15a);
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .logo small{
+      font-size:.52rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .links{display:flex;align-items:center;gap:2rem}
+    .links a{
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:500;
+      position:relative;
+      transition:.3s;
+    }
+    .links a:not(.btn)::after{
+      content:"";
+      position:absolute;
+      left:0;bottom:-4px;height:2px;width:0;
+      background:linear-gradient(90deg,#9C52D3,var(--gold));
+      transition:width .35s;
+    }
+    .links a:hover{color:var(--ink)}
+    .links a:hover::after{width:100%}
+    .btn{
+      display:inline-block;
+      padding:.9rem 2rem;
+      border-radius:40px;
+      border:0;
+      cursor:pointer;
+      font:600 .92rem var(--sans);
+      text-decoration:none;
+      color:#fff!important;
+      background:linear-gradient(120deg,#6B30A4,#b05ad6,#c8a15a,#6B30A4);
+      background-size:300% 100%;
+      transition:.5s;
+      box-shadow:0 8px 24px rgba(107,48,164,.22);
+    }
+    .btn:hover{
+      background-position:100% 0;
+      transform:translateY(-2px);
+      box-shadow:0 14px 32px rgba(107,48,164,.28);
+    }
+    .btn.ghost{
+      background:transparent;
+      color:var(--ink)!important;
+      border:1.5px solid var(--ink);
+      box-shadow:none;
+    }
+    .btn.ghost:hover{
+      background:var(--ink);
+      color:#fff!important;
+    }
+
+    .hero{
+      min-height:100vh;
+      min-height:100svh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      padding-top:7rem;
+      background:linear-gradient(180deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.06) 72%,rgba(255,255,255,0) 100%);
+    }
+
+    .hero-in{
+      position:relative;
+      max-width:660px;
+      z-index:2;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:.42rem 1.1rem;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.72);
+      border-radius:30px;
+      font-size:.78rem;
+      font-weight:600;
+      color:#7A285C;
+      margin-bottom:1.2rem;
+    }
+
+    .hero h1{
+      font-size:clamp(3rem,7vw,5.8rem);
+      letter-spacing:-.02em;
+    }
+
+    .grad{
+      background:linear-gradient(90deg,#9C52D3,#e05aa8,#c8a15a,#9C52D3);
+      background-size:300% 100%;
+      animation:shift 7s linear infinite;
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      font-style:italic;
+    }
+    @keyframes shift{to{background-position:300% 0}}
+
+    .hero p{
+      font-size:1.14rem;
+      color:var(--muted);
+      max-width:500px;
+      margin:1.3rem 0 2rem;
+    }
+
+    .hero .row{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .chips{
+      display:flex;flex-wrap:wrap;gap:.35rem;
+      margin-top:2.1rem;
+    }
+    .chips a{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:40px;padding:.35rem .82rem;border-radius:20px;
+      background:rgba(255,255,255,.75);
+      border:1px solid var(--line);
+      font-size:.8rem;
+      transition:color .25s ease, background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+    .chips a:hover,.chips a:focus-visible{
+      color:#fff;
+      background:linear-gradient(120deg,#6B30A4,#9C52D3,#c8a15a);
+      border-color:rgba(184,138,62,.72);
+      transform:translateY(-2px);
+      box-shadow:0 8px 18px rgba(107,48,164,.18);
+      outline:0;
+    }
+
+    .floating-card {
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 26px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 16px 32px rgba(73,51,92,0.10);
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      overflow: hidden;
+    }
+
+    .floating-card:hover{
+      transform: translateY(-8px);
+      box-shadow: 0 28px 48px rgba(99, 67, 120, 0.18);
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+      gap:1.4rem;
+    }
+
+    .card{
+      position:relative;
+      background:rgba(255,255,255,.84);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:1.8rem;
+      transition:transform .35s ease, box-shadow .35s ease;
+      box-shadow:0 18px 38px rgba(106,90,130,.04);
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 42px rgba(107,48,164,.12);
+    }
+    .card h3{font-size:1.42rem;margin-bottom:.4rem}
+    .card p{color:var(--muted);font-size:.92rem}
+    .card .m{
+      display:inline-block;
+      margin-top:.8rem;
+      font-size:.74rem;
+      font-weight:600;
+      color:#7A285C;
+      background:#ffd9ee;
+      padding:.15rem .7rem;
+      border-radius:12px;
+    }
+
+    .cg{margin-bottom:2.2rem}
+    .cg h3{
+      font-size:1.5rem;
+      color:#6B30A4;
+      margin-bottom:1rem;
+    }
+    .card.c{
+      padding:1.3rem 1.3rem;
+      border-left:4px solid #9C52D3;
+      background:rgba(255,255,255,.82);
+    }
+    .card.c h3{
+      font-size:1.12rem;
+      color:var(--ink);
+      margin:0 0 .2rem;
+    }
+
+    .cert-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:2rem;
+      max-width:1080px;
+      margin:2.2rem auto 0;
+    }
+    .cert-grid[hidden]{display:none}
+    .cert-toggle{display:block;margin:1.6rem auto 0}
+    .title{margin-bottom:2.8rem}
+    .title .eyebrow{
+      display:flex;align-items:center;justify-content:center;gap:1rem;
+      letter-spacing:.42em;font-size:.7rem;font-weight:600;color:#b88a3e;
+      margin-bottom:1rem;
+    }
+    .title .eyebrow::before,.title .eyebrow::after{
+      content:"";width:clamp(36px,9vw,84px);height:1px;
+      background:linear-gradient(90deg,transparent,#c8a15a);
+    }
+    .title .eyebrow::after{transform:scaleX(-1)}
+    .title h2{
+      font-weight:500;font-style:italic;
+      font-size:clamp(2.4rem,5vw,3.8rem);
+      letter-spacing:.005em;line-height:1.05;
+      background:linear-gradient(100deg,#2A1B3D 20%,#6B30A4 62%,#b88a3e 100%);
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;color:transparent;
+    }
+    .title p{
+      font-family:var(--serif);font-style:italic;font-size:1.2rem;
+      color:var(--muted);max-width:560px;margin:.9rem auto 0;
+    }
+    .title::after{
+      content:"";display:block;width:190px;height:14px;margin:1.4rem auto 0;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 14'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23c8a15a' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23c8a15a'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='1' x2='0'%3E%3Cstop offset='0' stop-color='%23c8a15a' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23c8a15a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='6.5' width='84' height='1' fill='url(%23a)'/%3E%3Crect x='106' y='6.5' width='84' height='1' fill='url(%23b)'/%3E%3Cpath d='M95 1l6 6-6 6-6-6z' fill='none' stroke='%23b88a3e' stroke-width='1.2'/%3E%3Cpath d='M95 4.5l2.5 2.5-2.5 2.5-2.5-2.5z' fill='%23c8a15a'/%3E%3C/svg%3E") center/contain no-repeat;
+    }
+
+    /* framed, gallery-style certificate */
+    .cert.floating-card{
+      --gold:linear-gradient(135deg,#ead9ab 0%,#c8a15a 32%,#f4e7c0 52%,#b88a3e 78%,#e3c98a 100%);
+      position:relative;
+      display:block;
+      padding:9px;
+      border:0;
+      border-radius:4px;
+      background:var(--gold);
+      box-shadow:0 2px 3px rgba(60,40,20,.18),0 18px 34px rgba(62,35,80,.16),0 40px 60px -30px rgba(62,35,80,.28);
+      backdrop-filter:none;-webkit-backdrop-filter:none;
+      overflow:hidden;
+      cursor:zoom-in;
+      transition:transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease;
+    }
+    .cert.floating-card:hover,.cert.floating-card:focus-visible{
+      transform:translateY(-8px);
+      box-shadow:0 4px 6px rgba(60,40,20,.2),0 30px 50px rgba(62,35,80,.22),0 50px 70px -30px rgba(62,35,80,.34);
+      outline:0;
+    }
+    .cert.floating-card::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);
+      transform:translateX(-130%);
+    }
+    .cert.floating-card:hover::after,.cert.floating-card:focus-visible::after{
+      transform:translateX(130%);transition:transform 1.1s ease;
+    }
+    .cert-thumb{
+      --pad:12px;
+      position:relative;
+      aspect-ratio:4/3;
+      height:auto;
+      min-height:0;
+      overflow:hidden;
+      padding:0;
+      display:block;
+      background:#fffdf8;
+      border:0;
+      border-radius:1px;
+      box-shadow:inset 0 0 0 1px rgba(184,138,62,.55),inset 0 3px 10px rgba(60,40,20,.14);
+    }
+    .cert-thumb img{
+      position:absolute;
+      top:var(--pad);left:var(--pad);
+      width:calc(100% - var(--pad) * 2);
+      height:calc(100% - var(--pad) * 2);
+      max-width:none;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 2px 4px rgba(60,40,20,.18));
+    }
+    .cert-thumb::after{
+      content:"";position:absolute;right:12px;bottom:12px;
+      width:38px;height:38px;border-radius:50%;
+      background:rgba(255,253,248,.94) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b88a3e' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='5.5'/%3E%3Cpath d='M15 15l4.5 4.5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/20px no-repeat;
+      border:1px solid rgba(184,138,62,.6);
+      box-shadow:0 6px 14px rgba(60,40,20,.2);
+      opacity:0;transform:scale(.8);
+      transition:opacity .35s ease,transform .35s ease;
+    }
+    .cert:hover .cert-thumb::after,.cert:focus-visible .cert-thumb::after{opacity:1;transform:none}
+
+    .flow-rail{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+      max-width:1000px;
+      margin:0 auto;
+    }
+
+    .flow-item{
+      position:relative;
+      min-width:180px;
+      max-width:220px;
+      flex:1 1 180px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:1.2rem 1rem;
+      text-align:center;
+      box-shadow:0 18px 28px rgba(87,54,111,.06);
+      color:var(--ink);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+
+    .flow-item:hover{
+      transform:translateY(-5px);
+      box-shadow:0 22px 34px rgba(87,54,111,.12);
+    }
+
+    .flow-item span{
+      display:block;
+      font-family:var(--serif);
+      font-size:1.8rem;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+
+    .flow-rail{align-items:flex-start;gap:.75rem}
+    .flow-item.detailed{
+      max-width:230px;
+      min-width:150px;
+      flex:1 1 180px;
+      text-align:left;
+      padding:.9rem .95rem;
+      border-radius:14px;
+      cursor:pointer;
+    }
+    .flow-item.detailed > span:not(.flow-no){font-size:1.3rem}
+
+    .flow-item.detailed p,
+    .flow-item.detailed ul,
+    .flow-item.detailed .flow-meta{
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
+      margin-top:0;
+      margin-bottom:0;
+      transition:max-height .4s ease, opacity .3s ease, margin .3s ease;
+    }
+
+    .flow-item.detailed:hover p,
+    .flow-item.detailed:focus-within p,
+    .flow-item.detailed.open p,
+    .flow-item.detailed:hover ul,
+    .flow-item.detailed:focus-within ul,
+    .flow-item.detailed.open ul,
+    .flow-item.detailed:hover .flow-meta,
+    .flow-item.detailed:focus-within .flow-meta,
+    .flow-item.detailed.open .flow-meta{
+      max-height:400px;
+      opacity:1;
+    }
+
+    .flow-item.detailed:hover p,
+    .flow-item.detailed:focus-within p,
+    .flow-item.detailed.open p{margin:.5rem 0 .45rem}
+
+    .flow-item.detailed:hover .flow-meta,
+    .flow-item.detailed:focus-within .flow-meta,
+    .flow-item.detailed.open .flow-meta{margin-top:.6rem}
+
+    .flow-item .flow-no{
+      display:block;
+      font-family:var(--sans);
+      line-height:1.2;
+      letter-spacing:.14em;
+      font-size:.66rem;
+      font-weight:600;
+      text-transform:uppercase;
+      color:var(--lav);
+      margin-bottom:.3rem;
+    }
+
+    .flow-item p{
+      font-size:.8rem;
+      line-height:1.45;
+      color:var(--muted);
+      margin:.7rem 0 .6rem;
+    }
+
+    .flow-item ul{
+      list-style:none;
+      display:grid;
+      gap:.3rem;
+      font-size:.76rem;
+      line-height:1.35;
+      color:var(--ink);
+    }
+
+    .flow-item li{
+      position:relative;
+      padding-left:1.1rem;
+    }
+
+    .flow-item li::before{
+      content:'\2713';
+      position:absolute;
+      left:0;
+      color:var(--pink);
+      font-weight:700;
+    }
+
+    .flow-item .flow-meta{
+      display:inline-block;
+      font-style:normal;
+      margin-top:.9rem;
+      font-size:.68rem;
+      font-weight:600;
+      color:var(--lav);
+      background:var(--soft);
+      border-radius:999px;
+      padding:.25rem .6rem;
+    }
+
+    /* ---------- service cards: hover / tap for more ---------- */
+    #svc{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));align-items:start;gap:1rem}
+    #svc .card.svc{scroll-margin-top:100px}
+    .card.svc{cursor:pointer;padding:1.3rem 1.3rem 1.1rem}
+    .card.svc .ico{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      font-size:1.2rem;color:var(--lav);
+      background:var(--soft);margin-bottom:.7rem;
+    }
+    .card.svc h3{font-size:1.25rem}
+    .card.svc .more{
+      max-height:0;opacity:0;overflow:hidden;
+      transition:max-height .45s ease, opacity .3s ease, margin .3s ease;
+    }
+    .card.svc:hover .more,
+    .card.svc:focus-within .more,
+    .card.svc.open .more,
+    .card.svc:target .more{max-height:420px;opacity:1;margin-top:.8rem}
+    .card.svc .more ul{
+      list-style:none;display:grid;gap:.35rem;
+      font-size:.84rem;line-height:1.4;color:var(--ink);
+      border-top:1px dashed var(--line);padding-top:.8rem;
+    }
+    .card.svc .more li{position:relative;padding-left:1.1rem}
+    .card.svc .more li::before{content:'\2713';position:absolute;left:0;color:var(--pink);font-weight:700}
+
+
+    /* ---------- site-wide refinement: gold hairlines, quiet shadows ---------- */
+    .cg > h3{
+      display:flex;align-items:center;gap:1rem;
+      font-weight:500;font-style:italic;font-size:1.7rem;color:#4a2a70;margin-bottom:1.1rem;
+    }
+    .cg > h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#c8a15a,transparent)}
+    .card{
+      border:1px solid rgba(200,161,90,.38);
+      border-radius:14px;
+      box-shadow:0 1px 2px rgba(60,40,20,.05),0 18px 36px -18px rgba(87,54,111,.22);
+    }
+    .card:hover{border-color:rgba(200,161,90,.8);box-shadow:0 2px 4px rgba(60,40,20,.08),0 26px 44px -16px rgba(87,54,111,.3)}
+    .card h3{font-weight:600}
+    .card.c{border-left:3px solid #c8a15a}
+    .card.svc .ico{
+      background:#fffdf8;color:#b88a3e;
+      border:1px solid rgba(200,161,90,.6);
+      border-radius:50%;
+    }
+    .card .m{background:#fbf3df;color:#8a6420;border:1px solid rgba(200,161,90,.45)}
+    .flow-item{border:1px solid rgba(200,161,90,.4)}
+    .flow-item .flow-no{color:#b88a3e}
+    .flow-item .flow-meta{background:#fbf3df;color:#8a6420}
+    .flow-item li::before,.card.svc .more li::before{color:#c8a15a}
+    .panel{border:1px solid rgba(200,161,90,.45)}
+    .book{border:1px solid rgba(200,161,90,.5)}
+    .tag{border-color:rgba(200,161,90,.6);color:#8a6420;letter-spacing:.06em}
+    .chips a{border-color:rgba(200,161,90,.45)}
+    .panel h4{font-weight:500;font-style:italic}
+    body footer{
+      border-top:0;position:relative;
+      font-family:var(--serif);font-style:italic;font-size:1rem;letter-spacing:.04em;
+    }
+    footer::before{
+      content:"";position:absolute;top:0;left:50%;width:min(420px,70%);height:1px;transform:translateX(-50%);
+      background:linear-gradient(90deg,transparent,#c8a15a,transparent);
+    }
+
+    .book-wrap{
+      position:relative;
+      max-width:920px;
+      margin:0 auto;
+    }
+
+    .book{
+      background:linear-gradient(135deg,rgba(228,198,255,.38),rgba(255,193,227,.38));
+      padding:2rem;
+      border-radius:28px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.5);
+      box-shadow:0 34px 80px rgba(87,54,111,.12);
+    }
+
+    .panel{
+      max-width:900px;
+      margin:0 auto;
+      background:rgba(255,255,255,.75);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-radius:24px;
+      padding:2.2rem;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.45);
+    }
+
+    .booking-message{
+      min-height:1.2rem;
+      color:#6B30A4;
+      font-size:.8rem;
+      line-height:1.35;
+      font-weight:500;
+      margin-bottom:.8rem;
+    }
+    .service-finder{display:flex;gap:.75rem;align-items:center;margin-bottom:.75rem}
+    .service-finder input{
+      flex:1;min-width:0;min-height:48px;padding:.8rem 1.1rem;border-radius:30px;
+      border:1.5px solid var(--line);background:rgba(255,255,255,.8);color:var(--ink);outline:0;
+    }
+    .service-finder input:focus{border-color:#9C52D3;box-shadow:0 0 0 4px rgba(156,82,211,.15)}
+    .service-finder .btn{min-height:48px;padding:.7rem 1.3rem;white-space:nowrap}
+    .steps{
+      display:flex;
+      gap:0;
+      margin-bottom:1.5rem;
+      background:rgba(156,82,211,0.06);
+      border:1px solid rgba(156,82,211,0.12);
+      border-radius:999px;
+      overflow:hidden;
+      height:8px;
+    }
+    .steps i{
+      flex:1;
+      height:100%;
+      background:rgba(156,82,211,0.08);
+      border-radius:0;
+      transition:all .35s ease;
+    }
+    .steps i.on{
+      background:linear-gradient(90deg,#9C52D3,var(--gold));
+    }
+    .panel h4{
+      font-family:var(--serif);
+      font-size:1.7rem;
+      margin-bottom:1rem;
+    }
+    .opts{
+      display:flex;flex-wrap:wrap;gap:.62rem;margin-bottom:1.2rem;
+    }
+    .opt{
+      padding:.7rem 1.1rem;
+      border-radius:30px;
+      border:1.5px solid var(--line);
+      background:rgba(255,255,255,.8);
+      cursor:pointer;
+      font:500 .88rem var(--sans);
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .opt:hover{
+      border-color:#9C52D3;
+      transform:translateY(-2px);
+      background:#f9d8ff;
+    }
+    .opt.sel{
+      background:linear-gradient(120deg,#6B30A4,#b05ad6);
+      color:#fff;
+      border-color:transparent;
+    }
+    .fld{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.8rem;
+      margin-bottom:1.2rem;
+    }
+    .phwrap{position:relative}
+    .phwrap span{
+      position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);
+      font-weight:600;color:#8a6420;pointer-events:none;
+    }
+    .fld .phwrap input{padding-left:3.5rem}
+    .fld input{
+      width:100%;
+      padding:.85rem 1.1rem;
+      border-radius:14px;
+      border:1.5px solid var(--line);
+      background:rgba(255,255,255,.8);
+      color:var(--ink);
+      outline:0;
+    }
+    .fld input:focus{border-color:#9C52D3}
+    .nav2{
+      display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    }
+    .sum{
+      background:#faf3ff;
+      border-radius:14px;
+      padding:1rem 1.3rem;
+      margin-bottom:1.2rem;
+      border:1px solid rgba(156,82,211,.1);
+      font-size:.95rem;
+    }
+    .hide{display:none}
+
+    .whatsapp-float{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      background:linear-gradient(120deg,#25D366,#1dbb5c);
+      color:#fff;
+      border-radius:999px;
+      padding:.8rem 1rem;
+      box-shadow:0 18px 34px rgba(37,211,54,.25);
+      font-weight:600;
+    }
+
+    .modal{
+      position:fixed;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      background:radial-gradient(circle at 50% 38%,rgba(70,32,104,.84),rgba(18,9,30,.95));
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+      z-index:100;
+      opacity:0;pointer-events:none;
+      transition:opacity .4s ease;
+      padding:1.4rem;
+    }
+    .modal.show{opacity:1;pointer-events:auto}
+    .modal-box{
+      position:relative;
+      width:min(880px,90vw);
+      padding:12px;
+      border-radius:4px;
+      background:linear-gradient(135deg,#ead9ab 0%,#c8a15a 32%,#f4e7c0 52%,#b88a3e 78%,#e3c98a 100%);
+      box-shadow:0 0 0 1px rgba(255,255,255,.12),0 50px 110px rgba(0,0,0,.55);
+      transform:translateY(18px) scale(.97);
+      transition:transform .6s cubic-bezier(.2,.8,.2,1);
+    }
+    .modal.show .modal-box{transform:none}
+    .modal-mat{
+      background:#fffdf8;
+      padding:clamp(10px,2.4vw,22px);
+      box-shadow:inset 0 0 0 1px rgba(184,138,62,.6),inset 0 4px 14px rgba(60,40,20,.14);
+    }
+    .modal-box img{
+      width:100%;
+      display:block;
+      max-height:70vh;
+      object-fit:contain;
+      background:#fffdf8;
+      transition:opacity .3s ease;
+    }
+    .modal-close,.modal-nav{
+      position:absolute;
+      width:44px;height:44px;border-radius:50%;
+      border:1px solid rgba(200,161,90,.8);
+      background:rgba(255,253,248,.96);
+      color:#8a6420;
+      display:grid;place-items:center;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(0,0,0,.3);
+      transition:transform .25s ease,background .25s ease,color .25s ease;
+    }
+    .modal-close{top:-16px;right:-16px;font-size:26px;line-height:1;z-index:2}
+    .modal-nav{top:50%;margin-top:-22px;font-size:22px;background:rgba(255,253,248,.14);color:#f4e7c0;box-shadow:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+    .modal-nav.prev{left:clamp(.6rem,3vw,2.5rem)}
+    .modal-nav.next{right:clamp(.6rem,3vw,2.5rem)}
+    .modal-close:hover,.modal-nav:hover{transform:scale(1.08);background:#c8a15a;color:#fff}
+    .modal-count{
+      position:absolute;left:0;right:0;bottom:1.1rem;text-align:center;
+      font-family:var(--serif);font-style:italic;font-size:1.15rem;letter-spacing:.12em;
+      color:#e9d6a4;
+    }
+
+    footer{
+      text-align:center;
+      padding:2.3rem 1rem;
+      color:var(--muted);
+      font-size:.88rem;
+      border-top:1px solid var(--line);
+    }
+
+    @media(max-width:760px){
+      .links a:not(.btn){display:none}
+      section{padding:4rem 6%}
+      .fld{grid-template-columns:1fr}
+      .nav2{flex-direction:column;align-items:stretch}
+      .flow-rail{flex-direction:column;align-items:stretch}
+      .flow-item{max-width:100%; width:100%;}
+      .flow-item.detailed{max-width:100%;min-width:0;flex:none}
+    }
+    @media(max-width:600px){
+      section{padding:3.2rem 5%}
+      nav{padding:.65rem 5%}
+      .logo svg{width:36px;height:36px}
+      .logo b{font-size:1.3rem}
+      .logo{gap:.55rem}
+      .logo b{letter-spacing:.045em}
+      .logo small{font-size:.4rem;letter-spacing:.12em}
+      .links .btn{padding:.6rem 1rem;font-size:.8rem}
+      .hero{padding-top:5.5rem;padding-bottom:2.5rem;min-height:auto}
+      .hero h1{font-size:clamp(2.3rem,11vw,3.2rem)}
+      .hero p{font-size:1rem;margin:1rem 0 1.5rem}
+      .hero .row .btn{flex:1 1 100%;text-align:center}
+      .service-finder{flex-direction:column;align-items:stretch}
+      .service-finder .btn{width:100%;min-height:48px}
+      .chips{margin-top:1.2rem;gap:.28rem}
+      .chips a{font-size:.72rem;padding:.3rem .58rem;min-height:44px}
+      .title{margin-bottom:1.8rem}
+      .title h2{font-size:1.9rem}
+      .title p{font-size:.92rem}
+      .card{padding:1.2rem}
+      .book{padding:.9rem;border-radius:20px}
+      .panel{padding:1.2rem;border-radius:18px}
+      .panel h4{font-size:1.4rem}
+      .opt{padding:.65rem 1rem;min-height:44px}
+      .fld input{font-size:16px}
+      .nav2 .btn{width:100%;text-align:center;min-height:46px}
+      .cert-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+      .cert.floating-card{padding:5px}
+      .cert-thumb{--pad:6px}
+      .cert-thumb::after{display:none}
+      .whatsapp-float{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:.75rem}
+      .whatsapp-float span{display:none}
+      .modal{padding:.8rem}
+      .modal-box{width:100%;padding:7px}
+      .modal-close{top:-14px;right:-6px;width:40px;height:40px}
+      .modal-nav{top:auto;bottom:2.6rem;margin:0;width:40px;height:40px}
+      .modal-nav.prev{left:calc(50% - 70px)}
+      .modal-nav.next{right:calc(50% - 70px)}
+      .modal-count{bottom:3.1rem;font-size:1rem}
+      footer{padding:1.6rem 1rem 5rem}
+    }
+    /* desktop browsers: details float over the page as a popover (no layout jump) */
+    @media(min-width:761px){
+      .card.svc{overflow:visible}
+      .card.svc:hover,.card.svc:focus-within,.card.svc.open{z-index:30}
+      .card.svc .more{
+        position:absolute;left:-1px;right:-1px;top:calc(100% - .4rem);
+        margin:0;padding:.9rem 1.3rem 1.1rem;
+        background:#fff;border:1px solid var(--line);border-top:0;
+        border-radius:0 0 18px 18px;
+        box-shadow:0 26px 44px rgba(107,48,164,.2);
+        pointer-events:none;
+      }
+      .card.svc:hover .more,.card.svc:focus-within .more,.card.svc.open .more{margin:0;pointer-events:auto}
+    }
+    @media(hover:none){
+      .floating-card,.card,.cert{backdrop-filter:none;-webkit-backdrop-filter:none}
+      .floating-card:hover,.card:hover,.flow-item:hover,.cert:hover{transform:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <nav id="nav">
+    <a href="#" class="logo" aria-label="FitNova">
+      <svg viewBox="0 0 48 48" fill="none">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="48" y2="48">
+            <stop stop-color="#6B30A4"/>
+            <stop offset=".55" stop-color="#e05aa8"/>
+            <stop offset="1" stop-color="#c8a15a"/>
+          </linearGradient>
+        </defs>
+        <circle cx="24" cy="24" r="22" stroke="url(#lg)" stroke-width="2"/>
+        <path d="M15 34V14l18 20V14" stroke="url(#lg)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="33" cy="9.5" r="2.6" fill="#c8a15a"/>
+      </svg>
+      <span><b>Fit<i>Nova</i></b><small>Physiotherapy &amp; Academy</small></span>
+    </a>
+
+    <div class="links">
+      <a href="#services">Services</a>
+      <a href="#credentials">Credentials</a>
+      <a href="#approach">Approach</a>
+      <a href="#book" class="btn">Book Appointment</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-in">
+      <span class="tag">Fitness first</span>
+      <h1>Move better.<br><span class="grad">Live stronger.</span></h1>
+      <p>Pain-free and functional movement for sports athletes and women, with care that is personal, precise and progressive.</p>
+      <div class="row">
+        <a href="#book" class="btn">Book Appointment</a>
+        <a href="tel:+919717672114" class="btn ghost">Call +91 9717672114</a>
+      </div>
+      <div class="chips" aria-label="Explore treatments">
+        <a href="#svc-cupping">Cupping</a><a href="#svc-taping">Taping</a><a href="#svc-iastm">IASTM</a><a href="#svc-mfr">MFR</a><a href="#svc-therapeutic-massage">Therapeutic Massage</a>
+        <a href="#svc-sports-rehab">Sports Rehab</a><a href="#svc-pelvic-floor-rehab">Pelvic Floor Rehab</a><a href="#svc-functional-rehab">Functional Rehab</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="title">
+      <span class="eyebrow">Services</span>
+      <h2>Care that fits your life</h2>
+      <p>Hover over (or tap) a card to see what is included. Every treatment plan starts with a proper assessment.</p>
+    </div>
+    <div class="grid" id="svc"></div>
+  </section>
+
+  <section id="credentials">
+    <div class="title">
+      <span class="eyebrow">Credentials &amp; Experience</span>
+      <h2>Trained. Certified. Field-tested.</h2>
+    </div>
+
+    <div id="cred"></div>
+
+    <div class="title cert-title" style="margin-top:2.2rem;">
+      <span class="eyebrow">Certificates</span>
+      <h2>Proof of expertise</h2>
+      <p>Recognised training and continuing education behind every treatment.</p>
+    </div>
+
+    <button class="btn ghost cert-toggle" id="certToggle" type="button" aria-expanded="false" aria-controls="certGrid">View certificates</button>
+    <div class="cert-grid" id="certGrid" hidden></div>
+  </section>
+
+  <section id="approach" style="text-align:center">
+    <div class="title">
+      <span class="eyebrow">The FitNova Approach</span>
+      <h2>Less guesswork. More progress.</h2>
+      <p>Personalised care with evidence-informed techniques for measurable, long-lasting recovery.</p>
+    </div>
+
+    <div id="flow" class="flow-rail"></div>
+  </section>
+
+  <section id="book" class="book-wrap">
+    <div class="book">
+      <div class="title">
+        <span class="eyebrow">Appointment</span>
+        <h2>Book your session</h2>
+      </div>
+
+      <div class="panel">
+        <div class="service-finder">
+          <input id="serviceSearch" type="search" placeholder="Describe what you need help with, e.g. knee pain while running" aria-label="Describe your concern to find a service">
+          <button class="btn" id="serviceSearchBtn" type="button">Find a service</button>
+        </div>
+        <p class="booking-message" id="bookingMessage" aria-live="polite">Describe your concern or choose a service.</p>
+
+        <div class="steps">
+          <i class="on"></i><i></i><i></i><i></i>
+        </div>
+
+        <div id="s0">
+          <h4>Choose a service</h4>
+          <div class="opts" id="oSvc"></div>
+        </div>
+
+        <div id="s1" class="hide">
+          <h4>Pick a day &amp; time</h4>
+          <div class="opts" id="oDay"></div>
+          <div class="opts" id="oTime"></div>
+        </div>
+
+        <div id="s2" class="hide">
+          <h4>Your details</h4>
+          <div class="fld">
+            <input id="nm" type="text" placeholder="Full name">
+            <div class="phwrap"><span>+91</span><input id="ph" type="tel" placeholder="Phone number" inputmode="tel" maxlength="18" autocomplete="tel-national"></div>
+          </div>
+        </div>
+
+        <div id="s3" class="hide">
+          <h4>Confirm</h4>
+          <div class="sum" id="sum"></div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">
+            This opens WhatsApp with your request. The clinic will confirm the slot with you.
+          </p>
+        </div>
+
+        <div class="nav2">
+          <button class="btn ghost" id="back" type="button">Back</button>
+          <button class="btn" id="next" type="button">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 FitNova Physiotherapy &amp; Academy · +91 9717672114 · Patient Care &amp; Performance Mobility</footer>
+
+  <a class="whatsapp-float" href="https://wa.me/919717672114?text=Hello%20FitNova%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noreferrer">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+      <path d="M20.52 15.7c-1.12 1.1-2.1 1.2-3.6.92-.8-.15-1.46-.34-2.8-.8-4.55-1.6-7.05-5.98-7.18-6.2-.23-.39-.34-.96-.03-1.52.27-.48.8-.93 1.38-.98l1.22-.13c.3-.03.56.11.75.35l.9 1.39c.24.38.17.86-.16 1.16l-.42.39c-.2.19-.22.48-.06.71l.92 1.34c.62.9 1.71 1.4 2.6 1.62l.65.17c.25.08.52-.02.7-.23l.52-.63c.26-.32.72-.4 1.08-.17l1.28.8c.36.22.52.67.4 1.06l-.3.7z"/>
+    </svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <div id="certModal" class="modal" aria-hidden="true">
+    <div class="modal-box">
+      <button class="modal-close" type="button" aria-label="Close certificate preview">×</button>
+      <div class="modal-mat"><img id="modalImg" src="" alt="Certificate preview"></div>
+    </div>
+    <button class="modal-nav prev" type="button" aria-label="Previous certificate">&#8249;</button>
+    <button class="modal-nav next" type="button" aria-label="Next certificate">&#8250;</button>
+    <div class="modal-count" id="modalCount"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const root = document.documentElement;
+      const $ = (selector) => document.querySelector(selector);
+      const PHONE = '919717672114';
+      // digits of the typed number, ignoring any +91 / 0 the visitor typed themselves
+      const phoneDigits = () => {
+        let d = document.getElementById('ph').value.replace(/\D/g, '');
+        if (d.length > 10 && d.startsWith('91')) d = d.slice(2);
+        return d.replace(/^0+/, '');
+      };
+      const phoneFull = () => '+91 ' + phoneDigits();
+
+      const SVC = [
+        ['◉','Cupping','Targeted cupping to ease muscle tension and support recovery.','cupping suction tight muscle muscles tension knot knots soreness stiff stiffness'],
+        ['▲','Taping','Supportive taping to aid comfortable movement and activity.','tape taping support movement ankle knee joint stability swelling'],
+        ['⌘','IASTM','Instrument-assisted soft tissue work for focused mobility care.','iastm instrument soft tissue scar scars adhesion adhesions mobility tendon stiffness stiff'],
+        ['❖','MFR','Myofascial release to address tightness and restricted movement.','mfr myofascial fascia fascial tightness tight restricted restriction mobility'],
+        ['✦','Therapeutic Massage','Hands-on massage to ease tension and support relaxation.','massage therapeutic stress relax relaxation knots tension soreness recovery'],
+        ['✧','Sports Rehab','Progressive rehabilitation for injury recovery and return to sport.','sports sport rehab athlete injury injured ligament sprain strain tendon running runner gym exercise performance'],
+        ['❀','Pelvic Floor Rehab','Private, individualised care for pelvic health and core recovery.','pelvic floor pelvic health urine urinary leak leakage bladder postpartum postnatal pregnancy core women'],
+        ['◇','Functional Rehab','Practical movement training for confidence in everyday activities.','functional rehab daily activity activities balance walking stairs mobility movement fall weakness']
+      ];
+
+      const SVC_MORE = {
+        'Cupping': [['Targeted treatment for tight, congested muscles', 'May support local circulation', 'Often used for neck, back and shoulder tension', 'Combined with movement and exercise'], 'Planned around your assessment'],
+        'Taping': [['Supports muscles and joints during activity', 'Can provide movement and posture cues', 'Applied to suit your activity and comfort', 'Used alongside a broader rehab plan'], 'Applied by your therapist'],
+        'IASTM': [['Focused instrument-assisted soft tissue work', 'May help address scar tissue and adhesions', 'Supports mobility in stiff areas', 'Short, targeted treatment'], 'Instrument-assisted care'],
+        'MFR': [['Slow, sustained myofascial techniques', 'Focus on restricted or sensitive areas', 'Supports easier, more comfortable movement', 'Adjusted to your comfort'], 'Individualised manual therapy'],
+        'Therapeutic Massage': [['Hands-on work for muscle tension', 'Supports relaxation and recovery', 'Pressure adapted to your comfort', 'Focused on your needs and goals'], 'Comfort-led treatment'],
+        'Sports Rehab': [['Progressive recovery for sports injuries', 'Strength, mobility and control training', 'Load management and injury prevention', 'Return-to-play progressions'], 'For athletes of all levels'],
+        'Pelvic Floor Rehab': [['Private, one-on-one sessions', 'Pelvic floor and core strengthening', 'Support for bladder control and pelvic pain', 'Post-partum recovery when appropriate'], 'Confidential · individualised care'],
+        'Functional Rehab': [['Task-specific strength and mobility', 'Balance, coordination and movement control', 'Practice for daily, work or sport activities', 'Progressed at your pace'], 'Built around your everyday goals']
+      };
+      const CRED = [
+        ['Clinical Certifications',[['Certified IAFM Therapist','Cortex Sports Therapy Association','CPD Approved'],['Certified Diversified Cupping Therapist','Cortex Sports Therapy Association','CPD Approved'],['Women\'s Health Physiotherapy','WOW IIPRE · ANC, PNC, Pelvic Floor Rehab & more','66 credit hours · 2026']]],
+        ['Sports Medicine Experience',[['Medical Team','14th Senior National Pencak Silat Championship, Shillong','Jul 2026'],['Guest of Honour','3rd All India Pencak Silat Championship, Uttarakhand','Jan 2026'],['38th National Games, Uttarakhand','Sports event participation','2025']]],
+        ['Conferences & Workshops',[['Telerehabilitation & VR in Stroke','Hands-on workshop · 10th INCPT, AIIMS New Delhi','16 Dec 2024'],['Delegate, 10th INCPT','AIIMS New Delhi','14–15 Dec 2024']]],
+        ['Currently Pursuing',[['Sports Science Course','IIT Madras · Exercise physiology, sports rehab, load management','In progress','p'],['FIFA Medical Network Diploma','Online diploma','In progress','p']]]
+      ];
+
+      const FLOW = [
+        ['Assessment', 'A detailed one-on-one evaluation to find the real cause of your pain, not just where it hurts.', [
+          'Medical history, lifestyle & goal discussion',
+          'Posture, gait and movement analysis',
+          'Joint range, strength & flexibility tests',
+          'Pain mapping and special orthopaedic tests',
+          'Review of reports, scans & prior treatment'
+        ], '45–60 min · in-clinic or online'],
+        ['Custom Plan', 'Your findings become a clear, written roadmap built around your body, schedule and goals.', [
+          'Diagnosis explained in simple terms',
+          'Short- and long-term recovery goals',
+          'Hands-on therapy mix: MFR, IASTM, cupping, taping',
+          'Personalised home exercise programme',
+          'Session frequency, timeline & progress check-ins'
+        ], 'Shared on day one · reviewed every 2–3 weeks'],
+        ['Targeted Rehab', 'Focused, progressive sessions that treat the cause and rebuild strength, mobility and control.', [
+          'Manual therapy to ease pain and stiffness',
+          'Guided corrective and strengthening exercises',
+          'Sport- or task-specific functional training',
+          'Load progressed safely week by week',
+          'Re-testing to measure real improvement'
+        ], 'Typically 2–3 sessions per week'],
+        ['Pain-Free Living', 'Leave confident, independent and equipped to stay healthy long after discharge.', [
+          'Maintenance and prevention exercise plan',
+          'Posture, ergonomics & lifestyle guidance',
+          'Return to sport, work and daily activities',
+          'Warning signs to watch for and self-care tips',
+          'Follow-up check-ins whenever you need them'
+        ], 'Ongoing support · in-clinic or online']
+      ];
+
+      const flowEl = document.getElementById('flow');
+      flowEl.innerHTML = FLOW.map(([title, desc, points, meta], i) => `
+        <div class="flow-item detailed" tabindex="0">
+          <span class="flow-no">Step ${i + 1}</span>
+          <span>${title}</span>
+          <p>${desc}</p>
+          <ul>${points.map(pt => `<li>${pt}</li>`).join('')}</ul>
+          <em class="flow-meta">${meta}</em>
+        </div>`).join('');
+
+      const certGrid = $('#certGrid');
+      const certToggle = $('#certToggle');
+      certToggle.addEventListener('click', () => {
+        const isOpening = certGrid.hidden;
+        certGrid.hidden = !isOpening;
+        certToggle.setAttribute('aria-expanded', String(isOpening));
+        certToggle.textContent = isOpening ? 'Hide certificates' : 'View certificates';
+      });
+
+      function reorderCertificates(files) {
+        if (files.length === 7) {
+          const last = files.splice(files.length - 1, 1)[0];
+          files.splice(3, 0, last);
+          return files;
+        }
+        return files;
+      }
+
+      async function loadCertificateImages() {
+        try {
+          const response = await fetch('./assets/');
+          const text = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, 'text/html');
+          const links = [...doc.querySelectorAll('a')].map(a => a.getAttribute('href')).filter(Boolean);
+
+          const imageFiles = links
+            .filter(href => /\.(jpe?g|png)$/i.test(href))
+            .map(href => {
+              const clean = href.split('?')[0];
+              return clean.startsWith('/') ? clean : './assets/' + clean;
+            });
+
+          if (!imageFiles.length) {
+            throw new Error('No certificate images found');
+          }
+
+          renderCertificates(reorderCertificates(imageFiles));
+        } catch (error) {
+          console.warn('Falling back to default certificate list', error);
+          renderCertificates(reorderCertificates([
+            'assets/cert-1.jpg',
+            'assets/cert-2.jpg',
+            'assets/cert-3.jpg',
+            'assets/cert-4.jpg',
+            'assets/cert-5.jpg',
+            'assets/cert-6.jpg',
+            'assets/cert-7.jpg'
+          ]));
+        }
+      }
+
+      function renderCertificates(files) {
+        certGrid.innerHTML = files.map((src, index) => {
+          const name = src.split('/').pop().replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+          return `
+            <button class="cert floating-card" type="button" data-img="${src}">
+              <div class="cert-thumb">
+                <img src="${src}" alt="${name}" onerror="this.parentElement.style.background='linear-gradient(135deg,#F4E9FF,#E7DDF9)'; this.style.display='none'">
+              </div>
+            </button>
+          `;
+        }).join('');
+      }
+
+      const modal = $('#certModal');
+      const modalImg = $('#modalImg');
+      const modalCount = $('#modalCount');
+      let certIdx = 0;
+
+      function showCert(i) {
+        const list = [...document.querySelectorAll('.cert')];
+        if (!list.length) return;
+        certIdx = (i + list.length) % list.length;
+        modalImg.style.opacity = 0;
+        setTimeout(() => { modalImg.src = list[certIdx].dataset.img; modalImg.style.opacity = 1; }, 120);
+        modalCount.textContent = `${certIdx + 1} / ${list.length}`;
+      }
+      function closeCert() {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('click', (event) => {
+        const certBtn = event.target.closest('.cert');
+        if (certBtn) {
+          showCert([...document.querySelectorAll('.cert')].indexOf(certBtn));
+          modal.classList.add('show');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          return;
+        }
+        if (event.target.closest('.modal-nav.prev')) { showCert(certIdx - 1); return; }
+        if (event.target.closest('.modal-nav.next')) { showCert(certIdx + 1); return; }
+        if (event.target.classList.contains('modal') || event.target.classList.contains('modal-close')) closeCert();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('show')) return;
+        if (e.key === 'Escape') closeCert();
+        if (e.key === 'ArrowLeft') showCert(certIdx - 1);
+        if (e.key === 'ArrowRight') showCert(certIdx + 1);
+      });
+
+      const card = (ico, t, d, m, cls = '') =>
+        `<article class="card floating-card ${cls}">${ico ? `<div class="ico">${ico}</div>` : ''}<h3>${t}</h3><p>${d}</p>${m ? `<span class="m">${m}</span>` : ''}</article>`;
+
+      $('#svc').innerHTML = SVC.map(s => {
+        const [pts, meta] = SVC_MORE[s[1]] || [[], ''];
+        const id = 'svc-' + s[1].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return `<article class="card floating-card svc" id="${id}" tabindex="0">
+          <div class="ico">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p>
+          <div class="more"><ul>${pts.map(p => `<li>${p}</li>`).join('')}</ul>${meta ? `<span class="m">${meta}</span>` : ''}</div>
+        </article>`;
+      }).join('');
+
+      // Tap / Enter toggles details (hover is not available on phones)
+      document.addEventListener('click', e => {
+        const c = e.target.closest('.card.svc, .flow-item.detailed');
+        document.querySelectorAll('.card.svc.open, .flow-item.detailed.open').forEach(o => { if (o !== c) o.classList.remove('open'); });
+        if (c && e.pointerType !== 'mouse') c.classList.toggle('open');
+      });
+      // Mouse hover handled in JS too, so it works in any browser or preview (VS Code, Live Server, etc.)
+      const HOVER_SEL = '.card.svc, .flow-item.detailed';
+      document.addEventListener('pointerover', e => {
+        if (e.pointerType !== 'mouse') return;
+        const c = e.target.closest(HOVER_SEL);
+        if (c) c.classList.add('open');
+      });
+      document.addEventListener('pointerout', e => {
+        if (e.pointerType !== 'mouse') return;
+        const c = e.target.closest(HOVER_SEL);
+        if (c && !c.contains(e.relatedTarget)) c.classList.remove('open');
+      });
+      document.addEventListener('keydown', e => {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.card.svc, .flow-item.detailed')) {
+          e.preventDefault();
+          e.target.classList.toggle('open');
+        }
+      });
+      $('#cred').innerHTML = CRED.map(g =>
+        `<div class="cg"><h3>${g[0]}</h3><div class="grid">${g[1].map(c => card('', c[0], c[1], c[2], 'c ' + (c[3] || ''))).join('')}</div></div>`
+      ).join('');
+
+      // Wave mesh background animation
+      const canvas = document.getElementById('bgCanvas');
+      const ctx = canvas.getContext('2d');
+      let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function drawMesh() {
+        const w = canvas.width;
+        const h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+
+        const pointerX = pointer.x;
+        const pointerY = pointer.y;
+
+        const small = w < 700;
+        const rows = small ? 9 : 18;
+        const cols = small ? 12 : 26;
+
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            const px = (x / cols) * w;
+            const py = (y / rows) * h;
+
+            const dx = px - pointerX;
+            const dy = py - pointerY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            const wave = Math.sin((px * 0.012) + performance.now() * 0.0018 + y * 0.7) * 14;
+            const wave2 = Math.cos((py * 0.015) + performance.now() * 0.0015 + x * 0.9) * 12;
+            const ripple = Math.exp(-dist / 240) * (pointer.active ? 36 : 12);
+
+            const nx = px + wave + ripple * 0.3;
+            const ny = py + wave2 + ripple * 0.2;
+
+            ctx.beginPath();
+            ctx.arc(nx, ny, 1.7, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${200 + (x / cols) * 40 + (pointerX / w) * 20}, 80%, 68%, ${0.20 + (y / rows) * 0.25})`;
+            ctx.fill();
+          }
+        }
+      }
+
+      function animate() {
+        drawMesh();
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        pointer.active = true;
+        root.style.setProperty('--mx', `${e.clientX}px`);
+        root.style.setProperty('--my', `${e.clientY}px`);
+        root.style.setProperty('--hue', Math.round(250 + (e.clientX / window.innerWidth) * 90));
+      });
+
+      window.addEventListener('pointerleave', () => {
+        pointer.active = false;
+      });
+
+      resizeCanvas();
+      animate();
+
+      window.addEventListener('resize', resizeCanvas);
+
+      function suggestService() {
+        const query = $('#serviceSearch').value.trim().toLowerCase();
+        const message = $('#bookingMessage');
+        if (!query) {
+          message.textContent = 'Describe a concern or choose a service.';
+          $('#serviceSearch').focus();
+          return;
+        }
+
+        let best = -1;
+        let score = 0;
+        SVC.forEach((service, index) => {
+          const matches = service[3].split(' ').filter(keyword => query.includes(keyword)).length;
+          if (matches > score) { score = matches; best = index; }
+        });
+
+        if (best < 0 || score === 0) {
+          message.textContent = 'No close match. Please choose a service.';
+          return;
+        }
+
+        pick(best);
+        message.textContent = 'Suggested: ' + SVC[best][1] + '. Your therapist will confirm.';
+      }
+
+      $('#serviceSearchBtn').addEventListener('click', suggestService);
+      $('#serviceSearch').addEventListener('keydown', event => {
+        if (event.key === 'Enter') suggestService();
+      });
+
+      const st = { step: 0, svc: null, day: null, time: null };
+      const days = [...Array(7)].map((_, i) => {
+        const d = new Date();
+        d.setDate(d.getDate() + i + 1);
+        return d;
+      }).filter(d => d.getDay() !== 0);
+
+      const times = ['9:00 AM','10:30 AM','12:00 PM','4:00 PM','5:30 PM','7:00 PM'];
+      const fmt = d => d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+
+      function opts(el, arr, key, cur) {
+        $(el).innerHTML = arr.map((a, i) => `
+          <button class="opt ${cur === i ? 'sel' : ''}" type="button" data-i="${i}">${a}</button>
+        `).join('');
+        $(el).querySelectorAll('.opt').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            st[key] = Number(btn.dataset.i);
+            render();
+          });
+        });
+      }
+
+      function pick(i){
+        st.svc = i;
+        render();
+      }
+
+      function render(){
+        opts('#oSvc', SVC.map(s => s[1]), 'svc', st.svc);
+        opts('#oDay', days.map(fmt), 'day', st.day);
+        opts('#oTime', times, 'time', st.time);
+
+        [0,1,2,3].forEach(i => {
+          document.getElementById('s' + i).classList.toggle('hide', i !== st.step);
+        });
+
+        document.querySelectorAll('.steps i').forEach((b, i) => {
+          b.classList.toggle('on', i <= st.step);
+        });
+
+        document.getElementById('back').style.visibility = st.step ? 'visible' : 'hidden';
+        document.getElementById('next').textContent = st.step === 3 ? 'Confirm on WhatsApp' : 'Next';
+
+        if (st.step === 3) {
+          document.getElementById('sum').innerHTML = `
+            <b>${SVC[st.svc][1]}</b><br>
+            ${fmt(days[st.day])} · ${times[st.time]}<br>
+            ${document.getElementById('nm').value} · ${phoneFull()}
+          `;
+        }
+      }
+
+      document.getElementById('back').addEventListener('click', () => {
+        st.step--;
+        render();
+      });
+
+      document.getElementById('next').addEventListener('click', () => {
+        const ok = [st.svc !== null, st.day !== null && st.time !== null, document.getElementById('nm').value.trim() && phoneDigits().length === 10, true][st.step];
+        if (!ok) {
+          document.getElementById('bookingMessage').textContent = 'Please complete this step to continue.';
+          return;
+        }
+
+        document.getElementById('bookingMessage').textContent = '';
+
+        if (st.step < 3) {
+          st.step++;
+          render();
+          return;
+        }
+
+        const msg = `Hello FitNova, I would like to book an appointment.\nService: ${SVC[st.svc][1]}\nDate: ${fmt(days[st.day])}\nTime: ${times[st.time]}\nName: ${document.getElementById('nm').value}\nPhone: ${phoneFull()}`;
+        window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+
+      loadCertificateImages();
+      render();
+    });
+  </script>
+
+</body>
+</html>
