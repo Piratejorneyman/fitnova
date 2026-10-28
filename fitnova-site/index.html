@@ -109,9 +109,10 @@
       box-shadow:0 1px 0 rgba(106,90,130,.12);
     }
     .logo{display:flex;align-items:center;gap:.75rem;color:var(--ink)}
-    .logo > span{display:flex;flex-direction:column;justify-content:center;gap:.3rem}
-    .logo svg{width:46px;height:46px;transition:transform .8s}
-    .logo:hover svg{transform:rotate(360deg)}
+    .logo-wordmark{display:flex;flex-direction:column;justify-content:center;gap:.3rem}
+    .logo-mark{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;flex-shrink:0}
+    .logo-mark svg{width:46px;height:46px;transition:transform .8s}
+    .logo:hover .logo-mark svg{transform:rotate(360deg)}
     .logo b{
       display:block;
       font-family:var(--serif);
@@ -361,7 +362,7 @@
     }
     .title::after{
       content:"";display:block;width:190px;height:14px;margin:1.4rem auto 0;
-      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 14'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23c8a15a' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23c8a15a'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='1' x2='0'%3E%3Cstop offset='0' stop-color='%23c8a15a' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23c8a15a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='6.5' width='84' height='1' fill='url(%23a)'/%3E%3Crect x='106' y='6.5' width='84' height='1' fill='url(%23b)'/%3E%3Cpath d='M95 1l6 6-6 6-6-6z' fill='none' stroke='%23b88a3e' stroke-width='1.2'/%3E%3Cpath d='M95 4.5l2.5 2.5-2.5 2.5-2.5-2.5z' fill='%23c8a15a'/%3E%3C/svg%3E") center/contain no-repeat;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 190 14'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23c8a15a' s[...]
     }
 
     /* framed, gallery-style certificate */
@@ -419,7 +420,7 @@
     .cert-thumb::after{
       content:"";position:absolute;right:12px;bottom:12px;
       width:38px;height:38px;border-radius:50%;
-      background:rgba(255,253,248,.94) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b88a3e' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='5.5'/%3E%3Cpath d='M15 15l4.5 4.5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/20px no-repeat;
+      background:rgba(255,253,248,.94) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b88a3e' stroke-width='1.6' stroke-linecap='round'%3E[...]
       border:1px solid rgba(184,138,62,.6);
       box-shadow:0 6px 14px rgba(60,40,20,.2);
       opacity:0;transform:scale(.8);
@@ -846,7 +847,7 @@
     @media(max-width:600px){
       section{padding:3.2rem 5%}
       nav{padding:.65rem 5%}
-      .logo svg{width:36px;height:36px}
+      .logo-mark svg{width:36px;height:36px}
       .logo b{font-size:1.3rem}
       .logo{gap:.55rem}
       .logo b{letter-spacing:.045em}
@@ -913,20 +914,25 @@
   <canvas id="bgCanvas"></canvas>
 
   <nav id="nav">
-    <a href="#" class="logo" aria-label="FitNova">
-      <svg viewBox="0 0 48 48" fill="none">
-        <defs>
-          <linearGradient id="lg" x1="0" y1="0" x2="48" y2="48">
-            <stop stop-color="#6B30A4"/>
-            <stop offset=".55" stop-color="#e05aa8"/>
-            <stop offset="1" stop-color="#c8a15a"/>
-          </linearGradient>
-        </defs>
-        <circle cx="24" cy="24" r="22" stroke="url(#lg)" stroke-width="2"/>
-        <path d="M15 34V14l18 20V14" stroke="url(#lg)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="33" cy="9.5" r="2.6" fill="#c8a15a"/>
-      </svg>
-      <span><b>Fit<i>Nova</i></b><small>Physiotherapy &amp; Academy</small></span>
+    <a href="#" class="logo" aria-label="FitNova Physiotherapy & Academy">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" role="img">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="48" y2="48">
+              <stop stop-color="#6B30A4"/>
+              <stop offset=".55" stop-color="#e05aa8"/>
+              <stop offset="1" stop-color="#c8a15a"/>
+            </linearGradient>
+          </defs>
+          <circle cx="24" cy="24" r="22" stroke="url(#lg)" stroke-width="2"/>
+          <path d="M15 34V14l18 20V14" stroke="url(#lg)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="33" cy="9.5" r="2.6" fill="#c8a15a"/>
+        </svg>
+      </span>
+      <span class="logo-wordmark">
+        <b>Fit<i>Nova</i></b>
+        <small>Physiotherapy &amp; Academy</small>
+      </span>
     </a>
 
     <div class="links">
@@ -998,475 +1004,235 @@
       </div>
 
       <div class="panel">
+        <div class="booking-message" id="bookingMessage">Everything starts with a short assessment.</div>
         <div class="service-finder">
-          <input id="serviceSearch" type="search" placeholder="Describe what you need help with, e.g. knee pain while running" aria-label="Describe your concern to find a service">
-          <button class="btn" id="serviceSearchBtn" type="button">Find a service</button>
+          <input id="serviceSearch" type="text" placeholder="Search a concern or treatment" aria-label="Search service">
+          <button class="btn" type="button" id="searchServiceBtn">Find</button>
         </div>
-        <p class="booking-message" id="bookingMessage" aria-live="polite">Describe your concern or choose a service.</p>
+        <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
 
-        <div class="steps">
-          <i class="on"></i><i></i><i></i><i></i>
-        </div>
-
-        <div id="s0">
+        <div id="pick1">
           <h4>Choose a service</h4>
-          <div class="opts" id="oSvc"></div>
+          <div class="opts" id="serviceOpts"></div>
         </div>
 
-        <div id="s1" class="hide">
-          <h4>Pick a day &amp; time</h4>
-          <div class="opts" id="oDay"></div>
-          <div class="opts" id="oTime"></div>
+        <div id="pick2" class="hide">
+          <h4>Who is this for?</h4>
+          <div class="opts" id="audienceOpts"></div>
         </div>
 
-        <div id="s2" class="hide">
+        <div id="pick3" class="hide">
           <h4>Your details</h4>
           <div class="fld">
-            <input id="nm" type="text" placeholder="Full name">
-            <div class="phwrap"><span>+91</span><input id="ph" type="tel" placeholder="Phone number" inputmode="tel" maxlength="18" autocomplete="tel-national"></div>
+            <div class="phwrap"><span>👤</span><input type="text" id="clientName" placeholder="Name" aria-label="Name"></div>
+            <div class="phwrap"><span>📱</span><input type="tel" id="clientPhone" placeholder="Phone" aria-label="Phone"></div>
+          </div>
+          <div class="fld">
+            <div class="phwrap"><span>📅</span><input type="date" id="clientDate" aria-label="Preferred date"></div>
+            <div class="phwrap"><span>🕒</span><input type="time" id="clientTime" aria-label="Preferred time"></div>
           </div>
         </div>
 
-        <div id="s3" class="hide">
-          <h4>Confirm</h4>
-          <div class="sum" id="sum"></div>
-          <p style="font-size:.85rem;color:var(--muted);margin-bottom:1rem">
-            This opens WhatsApp with your request. The clinic will confirm the slot with you.
-          </p>
-        </div>
+        <div class="sum" id="summaryBox">Your selected service will appear here.</div>
 
         <div class="nav2">
-          <button class="btn ghost" id="back" type="button">Back</button>
-          <button class="btn" id="next" type="button">Next</button>
+          <button class="btn ghost" type="button" id="prevStep">Back</button>
+          <button class="btn" type="button" id="nextStep">Next</button>
         </div>
       </div>
     </div>
   </section>
 
-  <footer>© 2026 FitNova Physiotherapy &amp; Academy · +91 9717672114 · Patient Care &amp; Performance Mobility</footer>
+  <footer>
+    © <span id="year"></span> FitNova Physiotherapy &amp; Academy • Recovery, movement and performance care.
+  </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/919717672114?text=Hello%20FitNova%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noreferrer">
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
-      <path d="M20.52 15.7c-1.12 1.1-2.1 1.2-3.6.92-.8-.15-1.46-.34-2.8-.8-4.55-1.6-7.05-5.98-7.18-6.2-.23-.39-.34-.96-.03-1.52.27-.48.8-.93 1.38-.98l1.22-.13c.3-.03.56.11.75.35l.9 1.39c.24.38.17.86-.16 1.16l-.42.39c-.2.19-.22.48-.06.71l.92 1.34c.62.9 1.71 1.4 2.6 1.62l.65.17c.25.08.52-.02.7-.23l.52-.63c.26-.32.72-.4 1.08-.17l1.28.8c.36.22.52.67.4 1.06l-.3.7z"/>
-    </svg>
+  <a class="whatsapp-float" href="https://wa.me/919717672114?text=Hi%20FitNova%2C%20I%20want%20to%20book%20an%20appointment." target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.52 3.48A11.75 11.75 0 0 0 12.05 0C5.94 0 1.08 4.85 1.08 10.84c0 1.9.5 3.76 1.47 5.39L1 23l6.98-1.82a10.8 10.8 0 0 0 5.07 1.54h.01c6.1 0 11.04-4.84 11.04-10.83 0-2.9-1.15-5.63-3.58-7.41ZM12.05 19.8h-.01a8.92 8.92 0 0 1-4.56-1.26l-.33-.19-4.15 1.08 1.1-4.04-.22-.34A8.79 8.79 0 0 1 3.24 10.8c0-4.88 4-8.86 8.81-8.86a8.84 8.84 0 0 1 8.81 8.86c0 4.86-3.96 8.84-8.81 8.84Zm4.83-6.62c-.26-.13-1.54-.76-1.78-.85-.25-.09-.42-.13-.6.13-.18.26-.7.85-.86 1.02-.15.18-.31.2-.57.07a7.12 7.12 0 0 1-2.1-1.29c-.77-.68-1.29-1.52-1.45-1.78-.15-.26-.02-.4.12-.53.12-.12.26-.31.39-.46.13-.15.18-.26.27-.43.09-.18.04-.34-.02-.47-.07-.13-.6-1.45-.82-1.98-.22-.52-.44-.45-.6-.46-.16-.01-.34-.01-.52-.01-.18 0-.47.07-.72.34-.25.27-.96.94-.96 2.3 0 1.36.98 2.67 1.12 2.85.14.18 1.94 2.96 4.71 4.15.66.28 1.18.45 1.58.57.66.21 1.26.18 1.74.11.53-.08 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.12-.25-.19-.52-.32Z" fill="currentColor"/></svg>
     <span>WhatsApp</span>
   </a>
 
-  <div id="certModal" class="modal" aria-hidden="true">
-    <div class="modal-box">
-      <button class="modal-close" type="button" aria-label="Close certificate preview">×</button>
-      <div class="modal-mat"><img id="modalImg" src="" alt="Certificate preview"></div>
+  <div class="modal" id="certModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-label="Certificate preview">
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+      <button class="modal-nav prev" type="button" aria-label="Previous certificate">&#8249;</button>
+      <button class="modal-nav next" type="button" aria-label="Next certificate">&#8250;</button>
+      <div class="modal-mat">
+        <img id="modalImage" alt="Certificate preview">
+      </div>
+      <div class="modal-count" id="modalCount"></div>
     </div>
-    <button class="modal-nav prev" type="button" aria-label="Previous certificate">&#8249;</button>
-    <button class="modal-nav next" type="button" aria-label="Next certificate">&#8250;</button>
-    <div class="modal-count" id="modalCount"></div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const root = document.documentElement;
-      const $ = (selector) => document.querySelector(selector);
-      const PHONE = '919717672114';
-      // digits of the typed number, ignoring any +91 / 0 the visitor typed themselves
-      const phoneDigits = () => {
-        let d = document.getElementById('ph').value.replace(/\D/g, '');
-        if (d.length > 10 && d.startsWith('91')) d = d.slice(2);
-        return d.replace(/^0+/, '');
-      };
-      const phoneFull = () => '+91 ' + phoneDigits();
+    const props = {
+      services: [
+        { name: 'Cupping', id: 'svc-cupping', icon: '🫧', summary: 'Deep tissue release & circulation support', detail: ['Skin-safe cupping for neck, shoulder and back tension', 'Improves local blood flow and tissue mobility', 'Useful before rehab or post-event recovery'] },
+        { name: 'Taping', id: 'svc-taping', icon: '🩹', summary: 'Movement support & pain relief', detail: ['Kinesiology taping for joints and posture', 'Helps with pain reduction during activity', 'Often paired with rehab or training support'] },
+        { name: 'IASTM', id: 'svc-iastm', icon: '🪵', summary: 'Instrument-assisted soft tissue work', detail: ['Targets scar tissue, tendon concerns and fascial restrictions', 'Promotes smoother tissue glide and recovery', 'Great for chronic pain or repetitive strain'] },
+        { name: 'MFR', id: 'svc-mfr', icon: '✋', summary: 'Myofascial release therapy', detail: ['Releases tight tissue chains and restrictive patterns', 'Improves mobility and movement quality', 'Often used before strength or sports progression'] },
+        { name: 'Therapeutic Massage', id: 'svc-therapeutic-massage', icon: '💆', summary: 'Recovery-focused massage therapy', detail: ['Relieves muscle fatigue, tension and stress', 'Supports circulation and postural reset', 'Tailored for active women and athletes'] },
+        { name: 'Sports Rehab', id: 'svc-sports-rehab', icon: '🏃', summary: 'Return-to-sport rehab', detail: ['Rehab planning for injuries and performance constraints', 'Strength, control and resilience progression', 'Ideal for runners, athletes and active adults'] },
+        { name: 'Pelvic Floor Rehab', id: 'svc-pelvic-floor-rehab', icon: '🧘', summary: 'Core, bladder & pelvic support', detail: ['Supports stress leakage, core coordination and pelvic pain', 'Evidence-informed rehab for women in all life stages', 'Combines breathing, control and movement retraining'] },
+        { name: 'Functional Rehab', id: 'svc-functional-rehab', icon: '⚙️', summary: 'Movement-based recovery', detail: ['Improves strength, mobility and daily function', 'Builds resilience for lifting, walking and workouts', 'Personalised for real-life goals and pain-free movement'] }
+      ],
+      credentials: [
+        { label: 'Clinical physiotherapy', text: 'Evidence-informed care for pain, mobility and return-to-function goals.' },
+        { label: 'Sports rehab', text: 'Athlete-focused planning with movement assessment and progressive loading.' },
+        { label: 'Women’s health & pelvic floor', text: 'Practical rehabilitation for leakage, pain, pressure and core control.' },
+        { label: 'Manual therapy', text: 'Hands-on treatment designed to reduce pain and restore function.' }
+      ],
+      flow: [
+        { no: '01', title: 'Assess', text: 'We identify the cause, not just the symptoms.', meta: 'History + movement + pain review' },
+        { no: '02', title: 'Treat', text: 'The plan targets the tissues, joints and habits driving the issue.', meta: 'Hands-on + exercise + recovery' },
+        { no: '03', title: 'Progress', text: 'We build function in stages so movement stays strong and pain-free.', meta: 'Mobility, strength and performance' }
+      ],
+      certs: [
+        'assets/cert-1.jpg',
+        'assets/cert-2.jpg',
+        'assets/cert-3.jpg',
+        'assets/cert-4.jpg',
+        'assets/cert-5.jpg',
+        'assets/cert-6.jpg',
+        'assets/cert-7.jpg'
+      ]
+    };
 
-      const SVC = [
-        ['◉','Cupping','Targeted cupping to ease muscle tension and support recovery.','cupping suction tight muscle muscles tension knot knots soreness stiff stiffness'],
-        ['▲','Taping','Supportive taping to aid comfortable movement and activity.','tape taping support movement ankle knee joint stability swelling'],
-        ['⌘','IASTM','Instrument-assisted soft tissue work for focused mobility care.','iastm instrument soft tissue scar scars adhesion adhesions mobility tendon stiffness stiff'],
-        ['❖','MFR','Myofascial release to address tightness and restricted movement.','mfr myofascial fascia fascial tightness tight restricted restriction mobility'],
-        ['✦','Therapeutic Massage','Hands-on massage to ease tension and support relaxation.','massage therapeutic stress relax relaxation knots tension soreness recovery'],
-        ['✧','Sports Rehab','Progressive rehabilitation for injury recovery and return to sport.','sports sport rehab athlete injury injured ligament sprain strain tendon running runner gym exercise performance'],
-        ['❀','Pelvic Floor Rehab','Private, individualised care for pelvic health and core recovery.','pelvic floor pelvic health urine urinary leak leakage bladder postpartum postnatal pregnancy core women'],
-        ['◇','Functional Rehab','Practical movement training for confidence in everyday activities.','functional rehab daily activity activities balance walking stairs mobility movement fall weakness']
-      ];
-
-      const SVC_MORE = {
-        'Cupping': [['Targeted treatment for tight, congested muscles', 'May support local circulation', 'Often used for neck, back and shoulder tension', 'Combined with movement and exercise'], 'Planned around your assessment'],
-        'Taping': [['Supports muscles and joints during activity', 'Can provide movement and posture cues', 'Applied to suit your activity and comfort', 'Used alongside a broader rehab plan'], 'Applied by your therapist'],
-        'IASTM': [['Focused instrument-assisted soft tissue work', 'May help address scar tissue and adhesions', 'Supports mobility in stiff areas', 'Short, targeted treatment'], 'Instrument-assisted care'],
-        'MFR': [['Slow, sustained myofascial techniques', 'Focus on restricted or sensitive areas', 'Supports easier, more comfortable movement', 'Adjusted to your comfort'], 'Individualised manual therapy'],
-        'Therapeutic Massage': [['Hands-on work for muscle tension', 'Supports relaxation and recovery', 'Pressure adapted to your comfort', 'Focused on your needs and goals'], 'Comfort-led treatment'],
-        'Sports Rehab': [['Progressive recovery for sports injuries', 'Strength, mobility and control training', 'Load management and injury prevention', 'Return-to-play progressions'], 'For athletes of all levels'],
-        'Pelvic Floor Rehab': [['Private, one-on-one sessions', 'Pelvic floor and core strengthening', 'Support for bladder control and pelvic pain', 'Post-partum recovery when appropriate'], 'Confidential · individualised care'],
-        'Functional Rehab': [['Task-specific strength and mobility', 'Balance, coordination and movement control', 'Practice for daily, work or sport activities', 'Progressed at your pace'], 'Built around your everyday goals']
-      };
-      const CRED = [
-        ['Clinical Certifications',[['Certified IAFM Therapist','Cortex Sports Therapy Association','CPD Approved'],['Certified Diversified Cupping Therapist','Cortex Sports Therapy Association','CPD Approved'],['Women\'s Health Physiotherapy','WOW IIPRE · ANC, PNC, Pelvic Floor Rehab & more','66 credit hours · 2026']]],
-        ['Sports Medicine Experience',[['Medical Team','14th Senior National Pencak Silat Championship, Shillong','Jul 2026'],['Guest of Honour','3rd All India Pencak Silat Championship, Uttarakhand','Jan 2026'],['38th National Games, Uttarakhand','Sports event participation','2025']]],
-        ['Conferences & Workshops',[['Telerehabilitation & VR in Stroke','Hands-on workshop · 10th INCPT, AIIMS New Delhi','16 Dec 2024'],['Delegate, 10th INCPT','AIIMS New Delhi','14–15 Dec 2024']]],
-        ['Currently Pursuing',[['Sports Science Course','IIT Madras · Exercise physiology, sports rehab, load management','In progress','p'],['FIFA Medical Network Diploma','Online diploma','In progress','p']]]
-      ];
-
-      const FLOW = [
-        ['Assessment', 'A detailed one-on-one evaluation to find the real cause of your pain, not just where it hurts.', [
-          'Medical history, lifestyle & goal discussion',
-          'Posture, gait and movement analysis',
-          'Joint range, strength & flexibility tests',
-          'Pain mapping and special orthopaedic tests',
-          'Review of reports, scans & prior treatment'
-        ], '45–60 min · in-clinic or online'],
-        ['Custom Plan', 'Your findings become a clear, written roadmap built around your body, schedule and goals.', [
-          'Diagnosis explained in simple terms',
-          'Short- and long-term recovery goals',
-          'Hands-on therapy mix: MFR, IASTM, cupping, taping',
-          'Personalised home exercise programme',
-          'Session frequency, timeline & progress check-ins'
-        ], 'Shared on day one · reviewed every 2–3 weeks'],
-        ['Targeted Rehab', 'Focused, progressive sessions that treat the cause and rebuild strength, mobility and control.', [
-          'Manual therapy to ease pain and stiffness',
-          'Guided corrective and strengthening exercises',
-          'Sport- or task-specific functional training',
-          'Load progressed safely week by week',
-          'Re-testing to measure real improvement'
-        ], 'Typically 2–3 sessions per week'],
-        ['Pain-Free Living', 'Leave confident, independent and equipped to stay healthy long after discharge.', [
-          'Maintenance and prevention exercise plan',
-          'Posture, ergonomics & lifestyle guidance',
-          'Return to sport, work and daily activities',
-          'Warning signs to watch for and self-care tips',
-          'Follow-up check-ins whenever you need them'
-        ], 'Ongoing support · in-clinic or online']
-      ];
-
-      const flowEl = document.getElementById('flow');
-      flowEl.innerHTML = FLOW.map(([title, desc, points, meta], i) => `
-        <div class="flow-item detailed" tabindex="0">
-          <span class="flow-no">Step ${i + 1}</span>
-          <span>${title}</span>
-          <p>${desc}</p>
-          <ul>${points.map(pt => `<li>${pt}</li>`).join('')}</ul>
-          <em class="flow-meta">${meta}</em>
-        </div>`).join('');
-
-      const certGrid = $('#certGrid');
-      const certToggle = $('#certToggle');
-      certToggle.addEventListener('click', () => {
-        const isOpening = certGrid.hidden;
-        certGrid.hidden = !isOpening;
-        certToggle.setAttribute('aria-expanded', String(isOpening));
-        certToggle.textContent = isOpening ? 'Hide certificates' : 'View certificates';
-      });
-
-      function reorderCertificates(files) {
-        if (files.length === 7) {
-          const last = files.splice(files.length - 1, 1)[0];
-          files.splice(3, 0, last);
-          return files;
-        }
-        return files;
-      }
-
-      async function loadCertificateImages() {
-        try {
-          const response = await fetch('./assets/');
-          const text = await response.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(text, 'text/html');
-          const links = [...doc.querySelectorAll('a')].map(a => a.getAttribute('href')).filter(Boolean);
-
-          const imageFiles = links
-            .filter(href => /\.(jpe?g|png)$/i.test(href))
-            .map(href => {
-              const clean = href.split('?')[0];
-              return clean.startsWith('/') ? clean : './assets/' + clean;
-            });
-
-          if (!imageFiles.length) {
-            throw new Error('No certificate images found');
-          }
-
-          renderCertificates(reorderCertificates(imageFiles));
-        } catch (error) {
-          console.warn('Falling back to default certificate list', error);
-          renderCertificates(reorderCertificates([
-            'assets/cert-1.jpg',
-            'assets/cert-2.jpg',
-            'assets/cert-3.jpg',
-            'assets/cert-4.jpg',
-            'assets/cert-5.jpg',
-            'assets/cert-6.jpg',
-            'assets/cert-7.jpg'
-          ]));
-        }
-      }
-
-      function renderCertificates(files) {
-        certGrid.innerHTML = files.map((src, index) => {
-          const name = src.split('/').pop().replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-          return `
-            <button class="cert floating-card" type="button" data-img="${src}">
-              <div class="cert-thumb">
-                <img src="${src}" alt="${name}" onerror="this.parentElement.style.background='linear-gradient(135deg,#F4E9FF,#E7DDF9)'; this.style.display='none'">
-              </div>
-            </button>
-          `;
-        }).join('');
-      }
-
-      const modal = $('#certModal');
-      const modalImg = $('#modalImg');
-      const modalCount = $('#modalCount');
-      let certIdx = 0;
-
-      function showCert(i) {
-        const list = [...document.querySelectorAll('.cert')];
-        if (!list.length) return;
-        certIdx = (i + list.length) % list.length;
-        modalImg.style.opacity = 0;
-        setTimeout(() => { modalImg.src = list[certIdx].dataset.img; modalImg.style.opacity = 1; }, 120);
-        modalCount.textContent = `${certIdx + 1} / ${list.length}`;
-      }
-      function closeCert() {
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      document.addEventListener('click', (event) => {
-        const certBtn = event.target.closest('.cert');
-        if (certBtn) {
-          showCert([...document.querySelectorAll('.cert')].indexOf(certBtn));
-          modal.classList.add('show');
-          modal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
-          return;
-        }
-        if (event.target.closest('.modal-nav.prev')) { showCert(certIdx - 1); return; }
-        if (event.target.closest('.modal-nav.next')) { showCert(certIdx + 1); return; }
-        if (event.target.classList.contains('modal') || event.target.classList.contains('modal-close')) closeCert();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (!modal.classList.contains('show')) return;
-        if (e.key === 'Escape') closeCert();
-        if (e.key === 'ArrowLeft') showCert(certIdx - 1);
-        if (e.key === 'ArrowRight') showCert(certIdx + 1);
-      });
-
-      const card = (ico, t, d, m, cls = '') =>
-        `<article class="card floating-card ${cls}">${ico ? `<div class="ico">${ico}</div>` : ''}<h3>${t}</h3><p>${d}</p>${m ? `<span class="m">${m}</span>` : ''}</article>`;
-
-      $('#svc').innerHTML = SVC.map(s => {
-        const [pts, meta] = SVC_MORE[s[1]] || [[], ''];
-        const id = 'svc-' + s[1].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        return `<article class="card floating-card svc" id="${id}" tabindex="0">
-          <div class="ico">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p>
-          <div class="more"><ul>${pts.map(p => `<li>${p}</li>`).join('')}</ul>${meta ? `<span class="m">${meta}</span>` : ''}</div>
-        </article>`;
-      }).join('');
-
-      // Tap / Enter toggles details (hover is not available on phones)
-      document.addEventListener('click', e => {
-        const c = e.target.closest('.card.svc, .flow-item.detailed');
-        document.querySelectorAll('.card.svc.open, .flow-item.detailed.open').forEach(o => { if (o !== c) o.classList.remove('open'); });
-        if (c && e.pointerType !== 'mouse') c.classList.toggle('open');
-      });
-      // Mouse hover handled in JS too, so it works in any browser or preview (VS Code, Live Server, etc.)
-      const HOVER_SEL = '.card.svc, .flow-item.detailed';
-      document.addEventListener('pointerover', e => {
-        if (e.pointerType !== 'mouse') return;
-        const c = e.target.closest(HOVER_SEL);
-        if (c) c.classList.add('open');
-      });
-      document.addEventListener('pointerout', e => {
-        if (e.pointerType !== 'mouse') return;
-        const c = e.target.closest(HOVER_SEL);
-        if (c && !c.contains(e.relatedTarget)) c.classList.remove('open');
-      });
-      document.addEventListener('keydown', e => {
-        if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.card.svc, .flow-item.detailed')) {
-          e.preventDefault();
-          e.target.classList.toggle('open');
-        }
-      });
-      $('#cred').innerHTML = CRED.map(g =>
-        `<div class="cg"><h3>${g[0]}</h3><div class="grid">${g[1].map(c => card('', c[0], c[1], c[2], 'c ' + (c[3] || ''))).join('')}</div></div>`
-      ).join('');
-
-      // Wave mesh background animation
-      const canvas = document.getElementById('bgCanvas');
-      const ctx = canvas.getContext('2d');
-      let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
-
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-
-      function drawMesh() {
-        const w = canvas.width;
-        const h = canvas.height;
-        ctx.clearRect(0, 0, w, h);
-
-        const pointerX = pointer.x;
-        const pointerY = pointer.y;
-
-        const small = w < 700;
-        const rows = small ? 9 : 18;
-        const cols = small ? 12 : 26;
-
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const px = (x / cols) * w;
-            const py = (y / rows) * h;
-
-            const dx = px - pointerX;
-            const dy = py - pointerY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            const wave = Math.sin((px * 0.012) + performance.now() * 0.0018 + y * 0.7) * 14;
-            const wave2 = Math.cos((py * 0.015) + performance.now() * 0.0015 + x * 0.9) * 12;
-            const ripple = Math.exp(-dist / 240) * (pointer.active ? 36 : 12);
-
-            const nx = px + wave + ripple * 0.3;
-            const ny = py + wave2 + ripple * 0.2;
-
-            ctx.beginPath();
-            ctx.arc(nx, ny, 1.7, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${200 + (x / cols) * 40 + (pointerX / w) * 20}, 80%, 68%, ${0.20 + (y / rows) * 0.25})`;
-            ctx.fill();
-          }
-        }
-      }
-
-      function animate() {
-        drawMesh();
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('pointermove', (e) => {
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
-        pointer.active = true;
-        root.style.setProperty('--mx', `${e.clientX}px`);
-        root.style.setProperty('--my', `${e.clientY}px`);
-        root.style.setProperty('--hue', Math.round(250 + (e.clientX / window.innerWidth) * 90));
-      });
-
-      window.addEventListener('pointerleave', () => {
-        pointer.active = false;
-      });
-
-      resizeCanvas();
-      animate();
-
-      window.addEventListener('resize', resizeCanvas);
-
-      function suggestService() {
-        const query = $('#serviceSearch').value.trim().toLowerCase();
-        const message = $('#bookingMessage');
-        if (!query) {
-          message.textContent = 'Describe a concern or choose a service.';
-          $('#serviceSearch').focus();
-          return;
-        }
-
-        let best = -1;
-        let score = 0;
-        SVC.forEach((service, index) => {
-          const matches = service[3].split(' ').filter(keyword => query.includes(keyword)).length;
-          if (matches > score) { score = matches; best = index; }
-        });
-
-        if (best < 0 || score === 0) {
-          message.textContent = 'No close match. Please choose a service.';
-          return;
-        }
-
-        pick(best);
-        message.textContent = 'Suggested: ' + SVC[best][1] + '. Your therapist will confirm.';
-      }
-
-      $('#serviceSearchBtn').addEventListener('click', suggestService);
-      $('#serviceSearch').addEventListener('keydown', event => {
-        if (event.key === 'Enter') suggestService();
-      });
-
-      const st = { step: 0, svc: null, day: null, time: null };
-      const days = [...Array(7)].map((_, i) => {
-        const d = new Date();
-        d.setDate(d.getDate() + i + 1);
-        return d;
-      }).filter(d => d.getDay() !== 0);
-
-      const times = ['9:00 AM','10:30 AM','12:00 PM','4:00 PM','5:30 PM','7:00 PM'];
-      const fmt = d => d.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
-
-      function opts(el, arr, key, cur) {
-        $(el).innerHTML = arr.map((a, i) => `
-          <button class="opt ${cur === i ? 'sel' : ''}" type="button" data-i="${i}">${a}</button>
-        `).join('');
-        $(el).querySelectorAll('.opt').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            st[key] = Number(btn.dataset.i);
-            render();
-          });
-        });
-      }
-
-      function pick(i){
-        st.svc = i;
-        render();
-      }
-
-      function render(){
-        opts('#oSvc', SVC.map(s => s[1]), 'svc', st.svc);
-        opts('#oDay', days.map(fmt), 'day', st.day);
-        opts('#oTime', times, 'time', st.time);
-
-        [0,1,2,3].forEach(i => {
-          document.getElementById('s' + i).classList.toggle('hide', i !== st.step);
-        });
-
-        document.querySelectorAll('.steps i').forEach((b, i) => {
-          b.classList.toggle('on', i <= st.step);
-        });
-
-        document.getElementById('back').style.visibility = st.step ? 'visible' : 'hidden';
-        document.getElementById('next').textContent = st.step === 3 ? 'Confirm on WhatsApp' : 'Next';
-
-        if (st.step === 3) {
-          document.getElementById('sum').innerHTML = `
-            <b>${SVC[st.svc][1]}</b><br>
-            ${fmt(days[st.day])} · ${times[st.time]}<br>
-            ${document.getElementById('nm').value} · ${phoneFull()}
-          `;
-        }
-      }
-
-      document.getElementById('back').addEventListener('click', () => {
-        st.step--;
-        render();
-      });
-
-      document.getElementById('next').addEventListener('click', () => {
-        const ok = [st.svc !== null, st.day !== null && st.time !== null, document.getElementById('nm').value.trim() && phoneDigits().length === 10, true][st.step];
-        if (!ok) {
-          document.getElementById('bookingMessage').textContent = 'Please complete this step to continue.';
-          return;
-        }
-
-        document.getElementById('bookingMessage').textContent = '';
-
-        if (st.step < 3) {
-          st.step++;
-          render();
-          return;
-        }
-
-        const msg = `Hello FitNova, I would like to book an appointment.\nService: ${SVC[st.svc][1]}\nDate: ${fmt(days[st.day])}\nTime: ${times[st.time]}\nName: ${document.getElementById('nm').value}\nPhone: ${phoneFull()}`;
-        window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
-      });
-
-      loadCertificateImages();
-      render();
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('sc', window.scrollY > 18);
     });
-  </script>
 
+    const svc = document.getElementById('svc');
+    props.services.forEach((service) => {
+      const card = document.createElement('article');
+      card.className = 'card svc';
+      card.id = service.id;
+      card.tabIndex = 0;
+      card.innerHTML = `
+        <div class="ico" aria-hidden="true">${service.icon}</div>
+        <h3>${service.name}</h3>
+        <p>${service.summary}</p>
+        <div class="more">
+          <ul>
+            ${service.detail.map((item) => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      card.addEventListener('click', () => card.classList.toggle('open'));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.classList.toggle('open');
+        }
+      });
+      svc.appendChild(card);
+    });
+
+    const cred = document.getElementById('cred');
+    const credWrap = document.createElement('div');
+    credWrap.className = 'grid cg';
+    props.credentials.forEach((item) => {
+      const c = document.createElement('div');
+      c.className = 'card c';
+      c.innerHTML = `
+        <h3>${item.label}</h3>
+        <p>${item.text}</p>
+      `;
+      credWrap.appendChild(c);
+    });
+    cred.appendChild(credWrap);
+
+    const flow = document.getElementById('flow');
+    props.flow.forEach((item) => {
+      const node = document.createElement('div');
+      node.className = 'flow-item detailed';
+      node.tabIndex = 0;
+      node.innerHTML = `
+        <span class="flow-no">${item.no}</span>
+        <span>${item.title}</span>
+        <p>${item.text}</p>
+        <div class="flow-meta">${item.meta}</div>
+      `;
+      node.addEventListener('click', () => node.classList.toggle('open'));
+      node.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          node.classList.toggle('open');
+        }
+      });
+      flow.appendChild(node);
+    });
+
+    const certGrid = document.getElementById('certGrid');
+    const certToggle = document.getElementById('certToggle');
+    const certModal = document.getElementById('certModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalCount = document.getElementById('modalCount');
+    let certIndex = 0;
+
+    props.certs.forEach((src, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cert floating-card';
+      btn.setAttribute('aria-label', `Open certificate ${index + 1}`);
+      btn.innerHTML = `
+        <span class="cert-thumb">
+          <img src="${src}" alt="Certificate ${index + 1}">
+        </span>
+      `;
+      btn.addEventListener('click', () => {
+        certIndex = index;
+        showCert(index);
+        certModal.classList.add('show');
+        certModal.setAttribute('aria-hidden', 'false');
+      });
+      certGrid.appendChild(btn);
+    });
+
+    function showCert(index) {
+      modalImage.src = props.certs[index];
+      modalCount.textContent = `${index + 1} / ${props.certs.length}`;
+    }
+
+    function closeModal() {
+      certModal.classList.remove('show');
+      certModal.setAttribute('aria-hidden', 'true');
+    }
+
+    certToggle.addEventListener('click', () => {
+      const isOpen = !certGrid.hidden;
+      certGrid.hidden = isOpen;
+      certToggle.setAttribute('aria-expanded', String(!isOpen));
+      certToggle.textContent = isOpen ? 'View certificates' : 'Hide certificates';
+    });
+
+    document.querySelector('.modal-close').addEventListener('click', closeModal);
+    certModal.addEventListener('click', (e) => {
+      if (e.target === certModal) closeModal();
+    });
+    document.querySelector('.modal-nav.prev').addEventListener('click', () => {
+      certIndex = (certIndex - 1 + props.certs.length) % props.certs.length;
+      showCert(certIndex);
+    });
+    document.querySelector('.modal-nav.next').addEventListener('click', () => {
+      certIndex = (certIndex + 1) % props.certs.length;
+      showCert(certIndex);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (!certModal.classList.contains('show')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') {
+        certIndex = (certIndex - 1 + props.certs.length) % props.certs.length;
+        showCert(certIndex);
+      }
+      if (e.key === 'ArrowRight') {
+        certIndex = (certIndex + 1) % props.certs.length;
+        showCert(certIndex);
+      }
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
